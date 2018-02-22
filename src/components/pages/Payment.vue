@@ -36,7 +36,7 @@
                 <th width="25%">Tx ID</th>
               </tr>
               </thead>
-              <tbody v-if="Object.keys(payments.payments).length > 0">
+              <tbody v-if="payments.payments != null && Object.keys(payments.payments).length > 0">
               <tr v-for="payment in payments.payments">
                 <td>{{ payment.timestamp | intToTimeStamp(true) }}</td>
                 <td>{{ payment.amount | intToBalance }}</td>
@@ -61,7 +61,6 @@
 
 <script>
   export default {
-    name: "Payment",
     data() {
       return {
         payments: new Object({

@@ -1,36 +1,34 @@
 <template>
   <div id="app">
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item" v-for="menu in menus">
-              <router-link v-bind:to="{ name: menu.route }" class="nav-link">{{ menu.name }}</router-link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <layout-navbar v-bind:menus="menus"></layout-navbar>
     </header>
     <main role="main">
       <div class="container" id="main">
         <router-view/>
       </div>
     </main>
+    <br/>
+    <footer class="container">
+      <layout-footer></layout-footer>
+    </footer>
   </div>
 </template>
 
 <script>
+  import LayoutNavbar from "./components/layouts/Navbar";
+  import LayoutFooter from "./components/layouts/Footer";
+
   export default {
-    name: 'AppComponent',
+    components: {
+      LayoutFooter,
+      LayoutNavbar
+    },
     data() {
       return {
         menus: [
           {name: 'Home', route: 'getHome'},
-          {name: 'Miners', route: 'initMiners'},
+          {name: 'Miners', route: 'getMiners'},
           {name: 'Blocks', route: 'getBlocks'},
           {name: 'Payments', route: 'getPayments'}
         ]
@@ -55,7 +53,7 @@
   }
 
   #main {
-    /*background-color: #FFFFFF;*/
+    margin-top: 55px;
   }
 
   .nav-link {

@@ -70,11 +70,10 @@
 
 <script>
   export default {
-    name: "Miner",
     data() {
       return {
+        title: 'Miners',
         styleMiner: {color: '#0056b3', cursor: 'pointer'},
-        title: 'Miner list',
         miners: {
           minersTotal: 0,
         },
@@ -92,6 +91,11 @@
             self.miners = res;
           })
       },
+      showAccount(e) {
+        let account = e.target.innerText;
+
+        this.$router.push('/account/' + account);
+      },
       run() {
         const self = this;
 
@@ -99,11 +103,6 @@
         self.intervalMiners = setInterval(function () {
           self.initMiners();
         }, self.myConfig.timeRefresh);
-      },
-      showAccount(e) {
-        let account = e.target.innerText;
-
-        this.$router.push('/account/' + account);
       }
     },
     computed: {
@@ -127,6 +126,9 @@
       }
     },
     created() {
+      document.title = this.title;
+    },
+    mounted() {
       this.run();
     },
     beforeDestroy() {

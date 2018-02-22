@@ -23,7 +23,7 @@
               </tbody>
               <tbody v-else>
               <tr>
-                <td colspan="3">
+                <td colspan="4">
                   <img class="loading" :src="this.myConfig.loadingSvg"/>
                 </td>
               </tr>
@@ -150,9 +150,10 @@
 
 <script>
   export default {
-    name: "Block",
     data() {
       return {
+        title: 'Blocks',
+        intervalBlocks: new Function(),
         blocks: new Object({
           luck: new Object(),
           matured: new Object(),
@@ -171,7 +172,15 @@
           .then(function (res) {
             self.blocks = res;
           })
-      }
+      },
+      run() {
+        const self = this;
+
+        self.initBlock();
+        self.intervalBlocks = setInterval(function () {
+          self.initBlock();
+        }, self.myConfig.timeRefresh);
+      },
     },
     computed: {
       processMantured() {
@@ -208,8 +217,14 @@
         return luck.toFixed(0);
       }
     },
+    created() {
+      document.title = this.title;
+    },
     mounted() {
-      this.initBlock();
+      this.run();
+    },
+    beforeDestroy() {
+      clearInterval(this.intervalBlocks);
     }
   }
 </script>

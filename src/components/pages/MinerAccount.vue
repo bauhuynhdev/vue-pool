@@ -253,17 +253,15 @@
 </template>
 
 <script>
-  import Chart from 'chart.js'
+  import Chart from '../../../node_modules/chart.js/src/chart'
   import Helpers from '@/helpers'
 
   export default {
-    name: "Miner-Account",
     data() {
       const self = this;
 
       return {
         styleUrl: {color: '#0056b3', cursor: 'pointer'},
-        title: '',
         accountId: self.$route.params.id,
         stats: new Object(),
         account: {
@@ -455,6 +453,9 @@
           self.initAccount();
         }, self.myConfig.timeRefresh + 500);
       }
+    },
+    created() {
+      document.title = this.accountId;
     },
     mounted() {
       this.initChart(this.$refs.myChart);

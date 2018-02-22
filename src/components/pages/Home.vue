@@ -96,11 +96,11 @@
 
 <script>
   export default {
-    name: "Home",
     data() {
       const self = this;
 
       return {
+        title: 'Home',
         stats: {
           minersTotal: 0,
           hashrate: 0,
@@ -239,6 +239,9 @@
           self.initStats();
         }, this.myConfig.timeRefresh);
       }
+    },
+    created() {
+      document.title = this.title;
     },
     mounted() {
       this.initChart(this.$refs.myChart);

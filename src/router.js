@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Miner from '@/components/Miner'
-import Block from '@/components/Block'
-import Payment from '@/components/Payment'
-import Account from '@/components/MinerAccount'
+import Home from '@/components/pages/Home'
+import Miner from '@/components/pages/Miner'
+import Block from '@/components/pages/Block'
+import Payment from '@/components/pages/Payment'
+import Account from '@/components/pages/MinerAccount'
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -17,7 +17,7 @@ export default new Router({
     },
     {
       path: '/miners',
-      name: 'initMiners',
+      name: 'getMiners',
       component: Miner
     },
     {
@@ -35,5 +35,8 @@ export default new Router({
       name: 'getAccount',
       component: Account
     }
-  ]
+  ],
+  mode: 'history'
 })
+
+export default router;
